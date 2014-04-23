@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Learn : MonoBehaviour {
+public class Learn{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	///<summary>Call this class every time the learn part needs to run.</summary>
+	public void IterateLearn(){
+
 	}
 }

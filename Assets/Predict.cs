@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Predict : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+public class Predict{
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	///<summary>Call this class every time the predict part needs to run.</summary>
+	public void IteratePredict(){
+		
 	}
 }

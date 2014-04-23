@@ -1,15 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AgentController : MonoBehaviour {
+		//References to the different parts of the Learning system.
+	Perception perception;
+	Learn learn;
+	Predict predict;
 
-	// Use this for initialization
-	void Start () {
-	
+		//Lists containing the  goals and actions the system can be used to achieve them.
+	public List<Goal> goals = new List<Goal>();
+	public List<BasicAction> actions = new List<BasicAction>();
+
+
+	void Start(){
+		InitializeAgent();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+
+		//The function that handles the initialization-step of the Learning system.
+	void InitializeAgent(){
+			//Initialize the objects needed in the system's loop.
+		perception = gameObject.GetComponent<Perception>();
+		perception.InitializePerception();
+		learn = new Learn();
+		predict = new Predict();
+	}
+
+
+	void Update(){
+		//Run through the different states in the learning system.
+		perception.IteratePerception();
+		learn.IterateLearn();
+		predict.IteratePredict();
 	}
 }
