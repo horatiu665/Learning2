@@ -8,6 +8,8 @@ public class Goal : MonoBehaviour
 {
 	public string goalName;
 
+	// serializable so that the changes are saved between plays (unity needs this setting) 
+	[System.Serializable]
 	public class GoalParameter
 	{
 		// this is only used when setting up the Perception system

@@ -46,4 +46,12 @@ public class StatusParameter {
 		Value = 0.0f;
 	}
 
+	// copies the values from another instance into the new instance
+	public StatusParameter(StatusParameter sp)
+	{
+		parameterType = sp.parameterType;
+		Value = sp.Value;
+
+	}
+
 }

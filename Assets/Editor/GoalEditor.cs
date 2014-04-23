@@ -52,8 +52,10 @@ public class GoalEditor : Editor
 			}
 			*/
 
-			// multiplier
-			gp.multiplier = EditorGUILayout.FloatField("Multiplier: ", gp.multiplier);
+			// multiplier for floats
+			if (gp.statusParameter.parameterType == ParameterTypes.Float) {
+				gp.multiplier = EditorGUILayout.FloatField("Multiplier: ", gp.multiplier);
+			}
 
 			GUILayout.EndHorizontal();
 
@@ -61,7 +63,10 @@ public class GoalEditor : Editor
 			gp.statusParameter.parameterType = (ParameterTypes)EditorGUILayout.EnumPopup("Type", gp.statusParameter.parameterType);
 
 		}
+		 
 
+		if (GUI.changed)
+			EditorUtility.SetDirty(goal);    
 	}
 
 }
