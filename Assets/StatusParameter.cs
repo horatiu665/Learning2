@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StatusParameter : MonoBehaviour {
+public enum ParameterTypes
+{
+	Float,
+	Bool
+}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+[System.Serializable]
+public class StatusParameter {
+
+	public object value;
+	public ParameterTypes parameterType;
+
 }
