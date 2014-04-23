@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.Linq;
 
 [CustomEditor(typeof(Goal))]
 public class GoalEditor : Editor
 {
-
-	string newParamName = "";
 
 	public override void OnInspectorGUI()
 	{
@@ -14,38 +13,52 @@ public class GoalEditor : Editor
 
 		goal.goalName = EditorGUILayout.TextField("Goal Name", goal.goalName);
 
-		newParamName = EditorGUILayout.TextField("New parameter name", newParamName);
+		var list = goal.goalParameters;
+
+		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Add new parameter")) {
-			string n = newParamName;
-			if (!goal.statusParameters.ContainsKey(n)) {
-				goal.statusParameters.Add(n, new StatusParameter());
+			string n = "New Parameter";
+			// if there is no goal parameter with the same name
+			if (!list.Exists(gp => gp.parameterName == n)) {
+				// create new goal parameter, initialize all the stuff from StatusParameter
+				list.Add(new Goal.GoalParameter(n));
 
 			}
 
 		}
 
 		if (GUILayout.Button("Clear all parameters")) {
-			goal.statusParameters.Clear();
+			goal.goalParameters.Clear();
 
 		}
+		GUILayout.EndHorizontal();
 
-		foreach (var sp in goal.statusParameters) {
+		foreach (var gp in goal.goalParameters) {
 
 			// param name
-			//EditorGUILayout.TextField("Param name", sp.Key);
+			gp.parameterName = EditorGUILayout.TextField("Param name", gp.parameterName);
 
+			//EditorGUILayout.LabelField("Parameter " + gp.parameterName);
 
-			if (sp.Value.parameterType == ParameterTypes.Float) {
-				EditorGUILayout.LabelField("Parameter " + sp.Key + ": " + (float)sp.Value.Value);
+			GUILayout.BeginHorizontal();
+			// show value
+			/*
+			if (gp.statusParameter.parameterType == ParameterTypes.Float) {
+				EditorGUILayout.LabelField("Value: " + (float)gp.statusParameter.Value);
 
-			} else if (sp.Value.parameterType == ParameterTypes.Bool) {
-				EditorGUILayout.LabelField("Parameter " + sp.Key + ": " + (bool)sp.Value.Value);
-
+			} else if (gp.statusParameter.parameterType == ParameterTypes.Bool) {
+				EditorGUILayout.LabelField("Value: " + (bool)gp.statusParameter.Value);
 
 			}
+			*/
+
+			// multiplier
+			gp.multiplier = EditorGUILayout.FloatField("Multiplier: ", gp.multiplier);
+
+			GUILayout.EndHorizontal();
 
 			// param type
-			sp.Value.parameterType = (ParameterTypes)EditorGUILayout.EnumPopup("Type", sp.Value.parameterType);
+			gp.statusParameter.parameterType = (ParameterTypes)EditorGUILayout.EnumPopup("Type", gp.statusParameter.parameterType);
 
 		}
 
