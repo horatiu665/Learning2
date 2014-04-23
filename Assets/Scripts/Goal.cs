@@ -18,7 +18,7 @@ public class Goal : MonoBehaviour
 		foreach (var sp in parameterList) {
 			// req.multiplier times the parameter value in the Perception system.
 			if (sp.Value.parameterType == ParameterTypes.Float) {
-				sum += (float)sp.Value.value;
+				sum += (float)sp.Value.Value;
 			}
 
 		}
