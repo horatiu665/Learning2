@@ -7,16 +7,14 @@ using System.Collections.Generic;
 public partial class Perception : MonoBehaviour
 {
 
-	AgentController agentController;
+	public AgentController agentController;
 
 	//A dictionary of the variables used by the system's goals. the format of the corresponding update function is "Get" + the name of the variable in the dictionary.
 	Dictionary<string, StatusParameter> statusParameters;
 
 	//Fill the dictionary statusParameters with all the status parameters in the different goals at system-startup.
-	public void InitializePerception()//AgentController agentController)
+	public void InitializePerception()
 	{
-		//this.agentController = agentController;
-
 		statusParameters = new Dictionary<string, StatusParameter>();
 		// for each goal
 		foreach (var goal in agentController.goals) {
