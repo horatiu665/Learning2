@@ -11,7 +11,7 @@ public class AgentController : MonoBehaviour {
 
 		//Lists containing the  goals and actions the system can be used to achieve them.
 	public List<Goal> goals = new List<Goal>();
-	List<BasicAction> actions = new List<BasicAction>();
+	public List<BasicAction> actions = new List<BasicAction>();
 		//List containing the collected memory of the Dictionary-'statusParameters'-from-perception's states in time. 
 	List<Dictionary<string,StatusParameter>> perceptionMemory = new List<Dictionary<string,StatusParameter>>();
 
