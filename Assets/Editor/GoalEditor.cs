@@ -19,21 +19,22 @@ public class GoalEditor : Editor
 			string n = newParamName;
 			if (!goal.statusParameters.ContainsKey(n)) {
 				goal.statusParameters.Add(n, new StatusParameter());
-				goal.statusParameters[n].Value = (float)0;
-				goal.statusParameters[n].name = n;
 
 			}
 
 		}
 
+		if (GUILayout.Button("Clear all parameters")) {
+			goal.statusParameters.Clear();
+
+		}
+
 		foreach (var sp in goal.statusParameters) {
-			
+
 			// param name
 			//EditorGUILayout.TextField("Param name", sp.Key);
 
-			// param type
-			sp.Value.parameterType = (ParameterTypes)EditorGUILayout.EnumPopup("Type", sp.Value.parameterType);
-			
+
 			if (sp.Value.parameterType == ParameterTypes.Float) {
 				EditorGUILayout.LabelField("Parameter " + sp.Key + ": " + (float)sp.Value.Value);
 
@@ -42,6 +43,9 @@ public class GoalEditor : Editor
 
 
 			}
+
+			// param type
+			sp.Value.parameterType = (ParameterTypes)EditorGUILayout.EnumPopup("Type", sp.Value.parameterType);
 
 		}
 

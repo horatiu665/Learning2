@@ -33,11 +33,17 @@ public class StatusParameter {
 			if (value == ParameterTypes.Bool) {
 				Value = false;
 			} else if (value == ParameterTypes.Float) {
-				Value = 0;
+				Value = 0f;
 			}
 			_parameterType = value;
 		}
 	}
-	public string name;
+	
+	// initializes vars to neutral values
+	public StatusParameter()
+	{
+		parameterType = ParameterTypes.Float;
+		Value = 0;
+	}
 
 }
