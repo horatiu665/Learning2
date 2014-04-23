@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class AgentController : MonoBehaviour {
 		//References to the different parts of the Learning system.
@@ -10,8 +11,9 @@ public class AgentController : MonoBehaviour {
 
 		//Lists containing the  goals and actions the system can be used to achieve them.
 	public List<Goal> goals = new List<Goal>();
-	public List<BasicAction> actions = new List<BasicAction>();
-
+	List<BasicAction> actions = new List<BasicAction>();
+		//List containing the collected memory of the Dictionary-'statusParameters'-from-perception's states in time. 
+	List<Dictionary<string,StatusParameter>> perceptionMemory = new List<Dictionary<string,StatusParameter>>();
 
 	void Start(){
 		InitializeAgent();
@@ -25,6 +27,9 @@ public class AgentController : MonoBehaviour {
 		perception.InitializePerception();
 		learn = new Learn();
 		predict = new Predict();
+
+			//Find the actions defined in the Actions child of the agent and put them in a list for referencing.
+		actions = transform.FindChild ("Actions").gameObject.GetComponents<BasicAction>().ToList();
 	}
 
 
