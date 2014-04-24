@@ -26,8 +26,7 @@ public partial class Perception : MonoBehaviour
 					statusParameters.Add(gp.parameterName, new StatusParameter(gp.statusParameter));
 					// make a reference to the new entry in the goal parameter
 					gp.statusParameter = statusParameters[gp.parameterName];
-					print(gp.parameterName + " has " + gp.multiplier);
-
+					
 				} else {
 					// make a reference to the existing entry in the goal parameter.
 					gp.statusParameter = statusParameters[gp.parameterName];

@@ -33,6 +33,8 @@ public class GoalEditor : Editor
 		}
 		GUILayout.EndHorizontal();
 
+		Goal.GoalParameter deletedParameter = null;
+
 		foreach (var gp in goal.goalParameters) {
 
 			// param name
@@ -59,14 +61,26 @@ public class GoalEditor : Editor
 
 			GUILayout.EndHorizontal();
 
+			GUILayout.BeginHorizontal();
 			// param type
 			gp.statusParameter.parameterType = (ParameterTypes)EditorGUILayout.EnumPopup("Type", gp.statusParameter.parameterType);
 
-		}
-		 
+			if (GUILayout.Button("Delete parameter")) {
+				deletedParameter = gp;
+				
+			}
 
-		if (GUI.changed)
-			EditorUtility.SetDirty(goal);    
+			GUILayout.EndHorizontal();
+
+		}
+
+		if (deletedParameter != null) {
+			goal.goalParameters.Remove(deletedParameter);
+		}
+
+		if (GUI.changed) {
+			EditorUtility.SetDirty(goal);
+		}
 	}
 
 }

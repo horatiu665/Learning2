@@ -43,16 +43,20 @@ public class AgentController : MonoBehaviour {
 
 	void Update(){
 			//Run through the different states in the learning system.
+		// 1. update status parameters in perception
 		perception.IteratePerception();
+		// 2. update actions weights to learn from the previous step
 		learn.IterateLearn();
-			//Choose the next action to do based on the predict class.
+			// 3. Choose the next action to do based on the predict class.
 		BasicAction actionToDoNext = predict.IteratePredict();
-			//Do the action that has been chosen to do next.
+			// 4. Do the action that has been chosen to do next.
 		actionToDoNext.DoAction();
-			//Put the freshly done action into actionsMemory for remembrance and remove the oldest if necessary.
+			// 5. Put the freshly done action into actionsMemory and remove the oldest if necessary.
 		actionsMemory.Insert (0, actionToDoNext);
 		while(actionsMemory.Count > memorySpace){
 			actionsMemory.RemoveAt(actionsMemory.Count -1);
 		}
+
+
 	}
 }
