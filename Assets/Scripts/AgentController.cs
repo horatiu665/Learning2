@@ -24,6 +24,9 @@ public class AgentController : MonoBehaviour {
 		InitializeAgent();
 	}
 
+	void Start(){
+		StartCoroutine (Updater());
+	}
 
 		//The function that handles the initialization-step of the Learning system.
 	void InitializeAgent(){
@@ -40,23 +43,22 @@ public class AgentController : MonoBehaviour {
 		actions = transform.FindChild ("Actions").gameObject.GetComponents<BasicAction>().ToList();
 	}
 
-
-	void Update(){
-			//Run through the different states in the learning system.
+	IEnumerator Updater(){
+		//Run through the different states in the learning system.
 		// 1. update status parameters in perception
 		perception.IteratePerception();
 		// 2. update actions weights to learn from the previous step
 		learn.IterateLearn();
-			// 3. Choose the next action to do based on the predict class.
+		// 3. Choose the next action to do based on the predict class.
 		BasicAction actionToDoNext = predict.IteratePredict();
-			// 4. Do the action that has been chosen to do next.
-		actionToDoNext.DoAction();
-			// 5. Put the freshly done action into actionsMemory and remove the oldest if necessary.
+		// 4. Do the action that has been chosen to do next.
+		yield return StartCoroutine(actionToDoNext.DoAction());
+		// 5. Put the freshly done action into actionsMemory and remove the oldest if necessary.
 		actionsMemory.Insert (0, actionToDoNext);
 		while(actionsMemory.Count > memorySpace){
 			actionsMemory.RemoveAt(actionsMemory.Count -1);
 		}
 
-
+		StartCoroutine (Updater ());
 	}
 }

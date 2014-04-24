@@ -10,13 +10,23 @@ public class Probability{
 	public float value;
 		//The impact at which it is likely that the statusParameter is changed by this action.
 	public float impact;
+
+	public void influenceProbability(float parameterImpact){
+		if(impact == 0){
+			impact = parameterImpact;
+		}
+		else{
+			impact *= (parameterImpact / impact) * Mathf.Sign (value);
+		}
+	}
 }
 
 	//An action that can be performed by the system.
 public class BasicAction : MonoBehaviour{
-	public List<Probability> propabilities = new List<Probability>();
+		//A list of the probability of impact this action has on each statusParameter.
+	public List<Probability> probabilities = new List<Probability>();
 
-	public virtual void DoAction(){
-
+	public virtual IEnumerator DoAction(){
+		yield return 0;
 	}
 }

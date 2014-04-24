@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ActionSpawnPeasant : BasicAction {
 
-	public override void DoAction(){
-		
+	public override IEnumerator DoAction(){
+		yield return base.DoAction();
 	}
 }

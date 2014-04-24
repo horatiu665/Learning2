@@ -8,8 +8,7 @@ public class Predict{
 
 		///<summary>Call this class every time the predict part needs to run.</summary>
 	public BasicAction IteratePredict(){
-		BasicAction actionToPerform = agentController.actions[0];
-
+		BasicAction actionToPerform = agentController.actions[Random.Range(0, agentController.actions.Count)];
 		return actionToPerform;
 	}
 }
