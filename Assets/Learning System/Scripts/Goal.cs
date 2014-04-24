@@ -30,7 +30,7 @@ public class Goal : MonoBehaviour
 	public List<GoalParameter> goalParameters = new List<GoalParameter>();
 
 
-	// utility is defined as how useful a state of the world is; it is calculated specifying how (un)desirable parameters are, by summing them up, multiplied by a positive or negative factor
+	//This function MUST be u(x) = s*x, where s is a real number, because of the way the action effects are estimated (by combining all possible effects and so on)
 	public float Utility(Dictionary<string, StatusParameter> parameterList)
 	{
 		float sum = 0;

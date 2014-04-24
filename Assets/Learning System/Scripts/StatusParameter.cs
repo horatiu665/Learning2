@@ -7,10 +7,14 @@ public enum ParameterTypes
 	Bool
 }
 
+/// <summary>
+/// The value is absolute for the parameters when they are referred to as worldState, and relative when they are used as action effects.
+/// </summary>
 [System.Serializable]
 public class StatusParameter {
 
 	private object _value;
+	// absolute for world state, relative for action effect
 	public object Value
 	{
 		get
