@@ -74,6 +74,32 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &32290131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 32290132}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &32290132
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 32290131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.29623222, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1001 &150789659
 Prefab:
   m_ObjectHideFlags: 0
@@ -119,8 +145,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 717f3b0e3227f9947be3fcc147b6a4d0, type: 2}
       propertyPath: thingsThatCanBeSpawned.Array.data[0].spawnKey2
-      value: 97
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 717f3b0e3227f9947be3fcc147b6a4d0, type: 2}
+      propertyPath: thingsThatCanBeSpawned.Array.data[0].spawnableRef
+      value: 
+      objectReference: {fileID: 100000, guid: 5d9c86d2c4b6d6445a56e0793f42be97, type: 2}
+    - target: {fileID: 11400000, guid: 717f3b0e3227f9947be3fcc147b6a4d0, type: 2}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 32290131}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 717f3b0e3227f9947be3fcc147b6a4d0, type: 2}
   m_RootGameObject: {fileID: 834833206}
@@ -296,9 +330,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thingsThatCanBeSpawned:
-  - spawnableRef: {fileID: 0}
+  - spawnableRef: {fileID: 100000, guid: 5d9c86d2c4b6d6445a56e0793f42be97, type: 2}
     spawnKey: 97
-    spawnKey2: 97
+    spawnKey2: 0
+  spawner: {fileID: 32290131}
+  direction: {x: -1, y: 0, z: 0}
 --- !u!1 &863970667
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +936,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thingsThatCanBeSpawned: []
+  spawner: {fileID: 0}
+  direction: {x: -1, y: 0, z: 0}
 --- !u!1 &2142556941
 GameObject:
   m_ObjectHideFlags: 0

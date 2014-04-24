@@ -44,9 +44,8 @@ public class Goal : MonoBehaviour
 			}
 
 		}
-		
-		return sum;
 
+		return sum;
 	}
 	
 }
