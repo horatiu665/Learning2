@@ -9,6 +9,9 @@ public class AgentController : MonoBehaviour {
 	Learn learn;
 	Predict predict;
 
+		//the amount of memory slots are available in the system.
+	public int memorySpace = 500;
+
 		//Lists containing the  goals and actions the system can be used to achieve them.
 	public List<Goal> goals = new List<Goal>();
 	public List<BasicAction> actions = new List<BasicAction>();
@@ -46,7 +49,10 @@ public class AgentController : MonoBehaviour {
 		BasicAction actionToDoNext = predict.IteratePredict();
 			//Do the action that has been chosen to do next.
 		actionToDoNext.DoAction();
-			//Put the freshly done action into actionsMemory for remembrance.
+			//Put the freshly done action into actionsMemory for remembrance and remove the oldest if necessary.
 		actionsMemory.Insert (0, actionToDoNext);
+		while(actionsMemory.Count > memorySpace){
+			actionsMemory.RemoveAt(actionsMemory.Count -1);
+		}
 	}
 }
