@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActionSpawnPeasant : BasicAction {
+public class ActionWait : BasicAction {
 
 	public override IEnumerator DoAction(){
+
+
 		yield return base.DoAction();
 	}
 }
