@@ -11,7 +11,7 @@ public class PlayerControlEditor : Editor
 	{
 		PlayerController plCtl = (PlayerController)target;
 		plCtl.spawner = (GameObject)EditorGUILayout.ObjectField("spawner", (Object)plCtl.spawner, typeof(GameObject), true);
-		plCtl.direction = (Vector3)EditorGUILayout.Vector3Field("Direction the player is facing", plCtl.direction);
+		plCtl.playerToAttack = (GameObject)EditorGUILayout.ObjectField("Player to attack", (Object)plCtl.playerToAttack, typeof(GameObject), true);
 
 		GUILayout.Box("", new GUILayoutOption[]{GUILayout.ExpandWidth(true), GUILayout.Height(1)});
 
@@ -35,7 +35,7 @@ public class PlayerControlEditor : Editor
 		GUILayout.EndHorizontal();
 
 
-		PlayerController.MobToSpawn deletedParameter = null;
+		PlayerController.MobToSpawn deletedMob = null;
 		
 		foreach (var pt in plCtl.thingsThatCanBeSpawned) {
 			GUILayout.Box("", new GUILayoutOption[]{GUILayout.ExpandWidth(true), GUILayout.Height(1)});
@@ -44,7 +44,7 @@ public class PlayerControlEditor : Editor
 			GUILayout.BeginHorizontal();
 
 
-			pt.spawnableRef = (GameObject)EditorGUILayout.ObjectField("Spawnable Ref", (Object)pt.spawnableRef, typeof(GameObject), false);
+			pt.spawnableRef = (GameObject)EditorGUILayout.ObjectField("Spawnable Ref", (Object)pt.spawnableRef, typeof(GameObject), true);
 
 
 			GUILayout.EndHorizontal();
@@ -60,14 +60,14 @@ public class PlayerControlEditor : Editor
 			GUILayout.EndHorizontal();
 
 
-			if (GUILayout.Button("Delete parameter")) {
-				deletedParameter = pt;
+			if (GUILayout.Button("Delete mobtype")) {
+				deletedMob = pt;
 				
 			}
 		}
 
-		if (deletedParameter != null) {
-			plCtl.thingsThatCanBeSpawned.Remove(deletedParameter);
+		if (deletedMob != null) {
+			plCtl.thingsThatCanBeSpawned.Remove(deletedMob);
 		}
 		
 		if (GUI.changed) {

@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour {
 	public List<MobToSpawn> thingsThatCanBeSpawned = new List<MobToSpawn>();
 		//A reference to the object indicating the point at which to spawn a mob.
 	public GameObject spawner;
-	public Vector3 direction = Vector3.left;
+		//A reference to the player that should be attacked. Placholder for system that makes more than 2 people possible.
+	public GameObject playerToAttack;
 
 
 	[System.Serializable]
@@ -40,6 +41,9 @@ public class PlayerController : MonoBehaviour {
 			   	Input.GetKey(thingToSpawn.spawnKey2)
 			){
 				GameObject newMob = (GameObject) Instantiate (thingToSpawn.spawnableRef, spawner.transform.position, Quaternion.identity);
+				MobController newMobsController = newMob.transform.FindChild("KnightChild").GetComponent<MobController>();
+				newMobsController.playerToAttack = playerToAttack;
+				//newMobsController.resistancesToMobs = thingToSpawn.spawnableRef.transform.FindChild("KnightChild").GetComponent<MobController>().resistancesToMobs;
 				newMob.transform.parent = GameObject.Find ("Mobmanager").transform;
 			}
 		}
