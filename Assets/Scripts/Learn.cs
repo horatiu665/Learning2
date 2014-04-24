@@ -20,12 +20,25 @@ public class Learn{
 
 					if(parameterImpact > 0){
 						actionJustPerformed.propabilities[i].value += 0.1f;
+						if(actionJustPerformed.propabilities[i].impact == 0){
+							actionJustPerformed.propabilities[i].impact = actionJustPerformed.propabilities[i].impact;
+						}
+						else{
+							actionJustPerformed.propabilities[i].impact *= (parameterImpact / actionJustPerformed.propabilities[i].impact) * Mathf.Sign (actionJustPerformed.propabilities[i].value);
+						}
 					}
 					else if(parameterImpact < 0){
 						actionJustPerformed.propabilities[i].value -= 0.1f;
+						if(actionJustPerformed.propabilities[i].impact == 0){
+							actionJustPerformed.propabilities[i].impact = actionJustPerformed.propabilities[i].impact;
+						}
+						else{
+							actionJustPerformed.propabilities[i].impact *= (parameterImpact / actionJustPerformed.propabilities[i].impact) * Mathf.Sign (actionJustPerformed.propabilities[i].value);
+						}
 					}
 					else{
-						actionJustPerformed.propabilities[i].value -= 0.01f * Mathf.Sign(actionJustPerformed.propabilities[i].value);
+						actionJustPerformed.propabilities[i].impact -= 0.01f * Mathf.Sign(actionJustPerformed.propabilities[i].impact);
+						actionJustPerformed.propabilities[i].impact += 1 * -Mathf.Sign (actionJustPerformed.propabilities[i].value);
 					}
 				}
 				else if(agentController.perceptionMemory[0][actionJustPerformed.propabilities[i].nameOfStatusParameter].parameterType == ParameterTypes.Bool){
@@ -33,12 +46,15 @@ public class Learn{
 					bool secondMemory = (bool)agentController.perceptionMemory[1][actionJustPerformed.propabilities[i].nameOfStatusParameter].Value;
 					if(firstMemory == true && secondMemory == false){
 						actionJustPerformed.propabilities[i].value += 0.1f;
+						actionJustPerformed.propabilities[i].impact = 100;
 					}
 					else if(firstMemory == false && secondMemory == true){
 						actionJustPerformed.propabilities[i].value -= 0.1f;
+						actionJustPerformed.propabilities[i].impact = 100;
 					}
 					else{
 						actionJustPerformed.propabilities[i].value -= 0.01f * Mathf.Sign(actionJustPerformed.propabilities[i].value);
+						actionJustPerformed.propabilities[i].impact = 100;
 					}
 				}
 			}
