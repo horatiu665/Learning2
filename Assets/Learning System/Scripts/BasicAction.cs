@@ -96,7 +96,8 @@ public class BasicAction : MonoBehaviour
 			// calculate the effects of the action on the new state knowing how close it is to the old worldState
 
 			// return the calculated effects
-			return worldStates[0];
+			//return worldStates[0];
+			return worldState;
 
 		}
 
@@ -117,8 +118,8 @@ public class BasicAction : MonoBehaviour
 	public WorldState CalculateEffectOnWorld(BasicAction action, WorldState worldState)
 	{
 		// get memory of other times, compare with current world state
-		WorldState estimatedEffect = action.memory.EstimateEffectOn(worldState);
-
+	//	WorldState estimatedEffect = action.memory.EstimateEffectOn(worldState);
+		WorldState estimatedEffect = worldState;
 		return estimatedEffect;
 
 	}

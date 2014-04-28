@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MobController : MonoBehaviour {
 
 	public float speed = 2.0f;
 	public float health = 20.0f;
 	public float baseDamage = 5.0f;
-	private bool dead = false;
+	public bool dead = false;
 	private bool canMove = true;
-	private List<Collision> collidingObjects = new List<Collision>();
+	private float attacktimer = 0.0f;
+	private List<Collider> collidingObjects = new List<Collider>();
 
 	[SerializeField]
 	public List<MobResistance> mobsresistanceToThisMob = new List<MobResistance>();
@@ -24,13 +26,15 @@ public class MobController : MonoBehaviour {
 			key = n;
 		}
 	}
-
-
+	
 	public GameObject playerToAttack;
 	private GameObject superGameObject;
 
+
 	void Awake(){
 		superGameObject = transform.parent.gameObject;
+		superGameObject.transform.GetComponent<TriggerFixToBeOnParent>().StartCollideWithOther += parentOnTriggerEnter;
+		superGameObject.transform.GetComponent<TriggerFixToBeOnParent>().StopCollideWithOther += parentOnTriggerExit;
 	}
 
 
@@ -82,20 +86,40 @@ public class MobController : MonoBehaviour {
 
 
 	bool Attack(){
+		MobController asd;
+		if((asd = collidingObjects[0].GetComponent<MobController>()) != null){
+			asd.loseHealth(this.gameObject);
+			
+			return true;
+		}
 
-		return true;
+		return false;
 	}
 
-	void OnCollisionEnter(Collision collision){
-		print ("asds");
-		if(!collidingObjects.Exists (col => col == collision)){
-			collidingObjects.Add(collision);
+
+	public void loseHealth(GameObject attacker){
+		string attackerType = attacker.name;
+		foreach(MobResistance mr in mobsresistanceToThisMob){
+			if(mr.key == attackerType){
+				health -= baseDamage / mr.value;
+				return;
+			}
+		}
+
+		health -= baseDamage;
+	}
+
+
+	void parentOnTriggerEnter(Collider collider){
+		if(!collidingObjects.Exists(col => col == collider)){
+			collidingObjects.Add(collider);
 		}
 	}
-
-	void OnCollisionExit(Collision collision){
-		if(collidingObjects.Exists(col => col == collision)){
-			collidingObjects.Remove(collision);
+	
+	
+	void parentOnTriggerExit(Collider collider){
+		if(collidingObjects.Exists(col => col == collider)){
+			collidingObjects.Remove(collider);
 		}
 	}
 }
