@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 136: {fileID: 13600000}
   - 23: {fileID: 2300000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Actions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400006}
   - 114: {fileID: 11400008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Perception
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - 4: {fileID: 400008}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Agent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -9.88809013, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thingsThatCanBeSpawned:
   - spawnableRef: {fileID: 100000, guid: 5d9c86d2c4b6d6445a56e0793f42be97, type: 2}
-    spawnKey: 108
+    spawnKey: 97
     spawnKey2: 0
   spawner: {fileID: 0}
   playerToAttack: {fileID: 0}
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5bd261eb9b3b04cae573f360da4a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  utility: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68f38e991121c647975a962a026b8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  utility: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -222,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adb3a7735255a548a03bb0ddb051707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  utility: 0
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,11 +248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a61612f896571478f855c1efe7f369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  memorySpace: 50
   goals:
   - {fileID: 11400012}
   actions: []
   actionsMemory: []
+  actionMemoryMax: 50
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

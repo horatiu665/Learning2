@@ -58,39 +58,50 @@ public class MobController : MonoBehaviour {
 		   canMove){
 			Vector3 direction = (playerToAttack.transform.position - superGameObject.transform.position).normalized;
 
-			if(canMove){
-				superGameObject.rigidbody.velocity = new Vector3((direction.x) * speed, 
-			    	                                             (direction.y) * speed, 
-			    	                                             (direction.z) * speed);
-				return true;
-			}
-			else{
-				superGameObject.rigidbody.velocity = Vector3.zero;
-
-				return false;
-			}
+			superGameObject.rigidbody.velocity = new Vector3((direction.x) * speed, 
+			   	                                             (direction.y) * speed, 
+			   	                                             (direction.z) * speed);
+			return true;
 		}
+
+		superGameObject.rigidbody.velocity = Vector3.zero;
 
 		return false;
 	}
 
 
 	void UpdateAwareness(){
+		canMove = true;
 		if(collidingObjects.Count > 0){
-			canMove = false;
-		}
-		else{
-			canMove = true;
+			foreach(Collider col in collidingObjects){
+				MobController asd;
+				if(col.transform.gameObject.name == "Cylinder"){
+					canMove = false;
+				}
+				else{ 
+					asd = col.transform.FindChild("MobChild").GetComponent<MobController>();
+					if(asd != null){
+						print ("hello");
+						if(asd.playerToAttack != playerToAttack){
+							canMove = false;
+						}
+					}
+				}
+			}
 		}
 	}
 
 
 	bool Attack(){
 		MobController asd;
-		if((asd = collidingObjects[0].GetComponent<MobController>()) != null){
-			asd.loseHealth(this.gameObject);
-			
-			return true;
+		if(((asd = collidingObjects[0].GetComponent<MobController>())) != null){
+			if(asd.transform.gameObject.name == "Player"
+			   	||
+			   asd.playerToAttack != playerToAttack){
+				asd.loseHealth(this.gameObject);
+				
+				return true;
+			}
 		}
 
 		return false;

@@ -11,7 +11,7 @@ GameObject:
   - 54: {fileID: 5400002}
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400002}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: KnightChild
   m_TagString: Mob
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: .5, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,10 +130,10 @@ MonoBehaviour:
   baseDamage: 5
   dead: 0
   mobsresistanceToThisMob:
-  - key: asd
-    value: 5454
-  - key: asd
-    value: 6635
+  - key: Knight
+    value: 0
+  - key: Peasant
+    value: 0
   playerToAttack: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
