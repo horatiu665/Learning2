@@ -14,6 +14,7 @@ public class MobControlEditor : Editor
 		mlCtl.speed = (float)EditorGUILayout.FloatField("Speed", mlCtl.speed);
 		mlCtl.health = (float)EditorGUILayout.FloatField("Health", mlCtl.health);
 		mlCtl.baseDamage = (float)EditorGUILayout.FloatField("Base Damage", mlCtl.baseDamage);
+		mlCtl.attackSpeed = (float)EditorGUILayout.FloatField("Attack Speed", mlCtl.attackSpeed);
 
 		GUILayout.Box("", new GUILayoutOption[]{GUILayout.ExpandWidth(true), GUILayout.Height(1)});
 		

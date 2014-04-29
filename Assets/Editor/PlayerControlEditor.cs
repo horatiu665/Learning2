@@ -10,6 +10,7 @@ public class PlayerControlEditor : Editor
 	public override void OnInspectorGUI()
 	{
 		PlayerController plCtl = (PlayerController)target;
+		plCtl.health = (float)EditorGUILayout.FloatField("Health", plCtl.health);
 		plCtl.spawner = (GameObject)EditorGUILayout.ObjectField("spawner", (Object)plCtl.spawner, typeof(GameObject), true);
 		plCtl.playerToAttack = (GameObject)EditorGUILayout.ObjectField("Player to attack", (Object)plCtl.playerToAttack, typeof(GameObject), true);
 
@@ -62,7 +63,6 @@ public class PlayerControlEditor : Editor
 
 			if (GUILayout.Button("Delete mobtype")) {
 				deletedMob = pt;
-				
 			}
 		}
 

@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
+	public float health = 20f;
 		//A list of the mob-types that can be spawned as well as their keybindings.
 	public List<MobToSpawn> thingsThatCanBeSpawned = new List<MobToSpawn>();
 		//A reference to the object indicating the point at which to spawn a mob.
 	public GameObject spawner;
-		//A reference to the player that should be attacked. Placholder for system that makes more than 2 people possible.
+		//A reference to the player that should be attacked. Placholder for system that makes more than 2 people possible. Needs to use 
 	public GameObject playerToAttack;
 
 
@@ -31,6 +32,14 @@ public class PlayerController : MonoBehaviour {
 			spawner = new GameObject();
 			spawner.transform.position = transform.position;
 		}
+	}
+
+		//the function to call when ripping the player of his health..
+	public void loseHealth(GameObject attacker, float baseDamage){
+
+
+		
+		health -= baseDamage;
 	}
 
 
