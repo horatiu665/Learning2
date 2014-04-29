@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 			   	Input.GetKey(thingToSpawn.spawnKey2)
 			){
 				GameObject newMob = (GameObject) Instantiate (thingToSpawn.spawnableRef, spawner.transform.position, Quaternion.identity);
-				MobController newMobsController = newMob.transform.FindChild("KnightChild").GetComponent<MobController>();
+				MobController newMobsController = newMob.transform.FindChild("MobChild").GetComponent<MobController>();
 				newMobsController.playerToAttack = playerToAttack;
 				//newMobsController.resistancesToMobs = thingToSpawn.spawnableRef.transform.FindChild("KnightChild").GetComponent<MobController>().resistancesToMobs;
 				newMob.transform.parent = GameObject.Find ("Mobmanager").transform;

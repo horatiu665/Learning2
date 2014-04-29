@@ -30,7 +30,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
   m_Layer: 9
-  m_Name: KnightChild
+  m_Name: MobChild
   m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

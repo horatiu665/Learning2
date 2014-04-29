@@ -6,6 +6,7 @@ using System.Linq;
 public class MobController : MonoBehaviour {
 
 	public float speed = 2.0f;
+	public float attackSpeed = 2.0f;
 	public float health = 20.0f;
 	public float baseDamage = 5.0f;
 	public bool dead = false;
@@ -26,8 +27,9 @@ public class MobController : MonoBehaviour {
 			key = n;
 		}
 	}
-	
+		//
 	public GameObject playerToAttack;
+		//
 	private GameObject superGameObject;
 
 
@@ -81,7 +83,6 @@ public class MobController : MonoBehaviour {
 				else{ 
 					asd = col.transform.FindChild("MobChild").GetComponent<MobController>();
 					if(asd != null){
-						print ("hello");
 						if(asd.playerToAttack != playerToAttack){
 							canMove = false;
 						}
@@ -109,7 +110,7 @@ public class MobController : MonoBehaviour {
 
 
 	public void loseHealth(GameObject attacker){
-		string attackerType = attacker.name;
+		string attackerType = attacker.transform.parent.gameObject.name;
 		foreach(MobResistance mr in mobsresistanceToThisMob){
 			if(mr.key == attackerType){
 				health -= baseDamage / mr.value;
