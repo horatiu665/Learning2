@@ -188,6 +188,15 @@ MonoBehaviour:
   - spawnableRef: {fileID: 100000, guid: 5d9c86d2c4b6d6445a56e0793f42be97, type: 2}
     spawnKey: 97
     spawnKey2: 0
+    spawnCooldown: 3
+    spawnTimer: 0
+    isFalseKeyDown: 0
+  - spawnableRef: {fileID: 100002, guid: 9aeea205db44a714cb26fcbd1a4885f1, type: 2}
+    spawnKey: 100
+    spawnKey2: 0
+    spawnCooldown: 1
+    spawnTimer: 0
+    isFalseKeyDown: 0
   spawner: {fileID: 0}
   playerToAttack: {fileID: 0}
 --- !u!114 &11400002
