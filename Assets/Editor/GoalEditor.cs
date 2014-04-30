@@ -24,7 +24,6 @@ public class GoalEditor : Editor
 				list.Add(new Goal.GoalParameter(n));
 
 			}
-
 		}
 
 		if (GUILayout.Button("Clear all parameters")) {

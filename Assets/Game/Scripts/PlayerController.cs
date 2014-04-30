@@ -20,6 +20,12 @@ public class PlayerController : CharacterController {
 		public KeyCode spawnKey2;
 		public float spawnCooldown;
 		public float spawnTimer;
+
+		public bool isFalseKeyDown = false;
+		
+		public void SetKeyDown(){
+			isFalseKeyDown = true;
+		}
 			//Constructor for eventual things to be defined by add new spawnerthing. Called in PlayerControlEditor on when adding to list.
 		public MobToSpawn(){
 
@@ -41,6 +47,8 @@ public class PlayerController : CharacterController {
 				if(	Input.GetKey(thingToSpawn.spawnKey)
 				   		||
 				   	Input.GetKey(thingToSpawn.spawnKey2)
+				   		||
+				   	thingToSpawn.isFalseKeyDown
 				){
 					GameObject newMob = (GameObject) Instantiate (thingToSpawn.spawnableRef, spawner.transform.position, Quaternion.identity);
 					MobController newMobsController = newMob.transform.FindChild("MobChild").GetComponent<MobController>();
@@ -48,6 +56,7 @@ public class PlayerController : CharacterController {
 					//newMobsController.resistancesToMobs = thingToSpawn.spawnableRef.transform.FindChild("KnightChild").GetComponent<MobController>().resistancesToMobs;
 					newMob.transform.parent = GameObject.Find ("Mobmanager").transform;
 					thingToSpawn.spawnTimer = Time.time;
+					thingToSpawn.isFalseKeyDown = false;
 				}
 			}
 		}
