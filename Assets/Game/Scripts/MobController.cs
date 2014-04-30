@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class MobController : MonoBehaviour {
+public class MobController : CharacterController {
 
 	public float speed = 2.0f;
 	public float attackSpeed = 2.0f;
-	public float health = 20.0f;
 	public float baseDamage = 5.0f;
 	public bool dead = false;
 	private bool canMove = true;
 	private float attacktimer = 0.0f;
+	public float attackCooldown = 1.0f;
 	private List<Collider> collidingObjects = new List<Collider>();
 
 	[SerializeField]
@@ -41,9 +41,9 @@ public class MobController : MonoBehaviour {
 
 
 	void Update () {
-		if(!dead){
-			UpdateAwareness();
+		UpdateAwareness();
 
+		if(!dead){
 			if(!Move ()){
 				Attack();
 			}	
@@ -73,35 +73,73 @@ public class MobController : MonoBehaviour {
 
 
 	void UpdateAwareness(){
+		if(health <= 0.0f){
+			dead = true;
+		}
+
 		canMove = true;
+
 		if(collidingObjects.Count > 0){
+				//because onTriggerEnter isn't called before this, a null reference exception is called once. 
+				//This is avoided by removing all colliders from the list of colliders, that has a null-reference. 
+			List<Collider> destroyColliders = new List<Collider>();
+
 			foreach(Collider col in collidingObjects){
-				MobController asd;
-				if(col.transform.gameObject.name == "Cylinder"){
-					canMove = false;
-				}
-				else{ 
-					asd = col.transform.FindChild("MobChild").GetComponent<MobController>();
-					if(asd != null){
-						if(asd.playerToAttack != playerToAttack){
-							canMove = false;
+				if(col != null){
+					MobController asd;
+
+					if(col.transform.gameObject.name == "Cylinder"){
+						canMove = false;
+					}
+					else{
+						asd = col.transform.FindChild("MobChild").GetComponent<MobController>();
+
+						if(asd != null){
+							if(asd.playerToAttack != playerToAttack){
+								canMove = false;
+							}
 						}
 					}
 				}
+				else{
+					destroyColliders.Add(col);
+				}
+			}
+				
+			foreach(Collider destroyCollider in destroyColliders){
+				collidingObjects.Remove (destroyCollider);
 			}
 		}
 	}
 
 
 	bool Attack(){
-		MobController asd;
-		if(((asd = collidingObjects[0].GetComponent<MobController>())) != null){
-			if(asd.transform.gameObject.name == "Player"
-			   	||
-			   asd.playerToAttack != playerToAttack){
-				asd.loseHealth(this.gameObject);
-				
-				return true;
+		if(attacktimer + attackCooldown < Time.time){
+			foreach(Collider collidingObject in collidingObjects){
+				if(collidingObject.transform.FindChild("MobChild") != null){
+					MobController asd;
+
+					if(((asd = collidingObject.transform.FindChild("MobChild").GetComponent<MobController>())) != null){
+
+						if(asd.playerToAttack != playerToAttack){
+
+							asd.loseHealth(this.gameObject, baseDamage);
+							attacktimer = Time.time;
+
+							return true;
+						}
+					}
+				}
+				else if(collidingObject.transform.parent.gameObject.name == "Player"){
+					PlayerController asd;
+
+					if(((asd = collidingObject.transform.parent.GetComponent<PlayerController>())) != null){
+						asd.loseHealth(this.gameObject, baseDamage);
+						attacktimer = Time.time;
+
+						return true;
+					}
+				}
 			}
 		}
 
@@ -109,16 +147,18 @@ public class MobController : MonoBehaviour {
 	}
 
 
-	public void loseHealth(GameObject attacker){
+	public override void loseHealth(GameObject attacker, float _baseDamage){
 		string attackerType = attacker.transform.parent.gameObject.name;
+
 		foreach(MobResistance mr in mobsresistanceToThisMob){
 			if(mr.key == attackerType){
-				health -= baseDamage / mr.value;
+				health -= _baseDamage / mr.value;
+					//if we set health here we shouldn't later in the function too. break from function to not do that.
 				return;
 			}
 		}
 
-		health -= baseDamage;
+		base.loseHealth(attacker, _baseDamage);
 	}
 
 

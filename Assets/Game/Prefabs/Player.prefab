@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd95da9b49500941aa9c2041a9cbdf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 20
   thingsThatCanBeSpawned:
   - spawnableRef: {fileID: 100000, guid: 5d9c86d2c4b6d6445a56e0793f42be97, type: 2}
     spawnKey: 97
@@ -264,9 +265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8efffd428b0c544ebe680d719d10f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goalName: ghj
+  goalName: dontDie
   goalParameters:
-  - parameterName: New Parameter
+  - parameterName: playerHealth
     multiplier: 1
 --- !u!136 &13600000
 CapsuleCollider:

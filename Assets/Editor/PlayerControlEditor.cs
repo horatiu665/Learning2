@@ -57,6 +57,12 @@ public class PlayerControlEditor : Editor
 			pt.spawnKey = (KeyCode)EditorGUILayout.EnumPopup("Main keybind for spawn", pt.spawnKey);
 			pt.spawnKey2 = (KeyCode)EditorGUILayout.EnumPopup("Alt keybind for spawn", pt.spawnKey2);
 
+			GUILayout.EndHorizontal();
+
+
+			GUILayout.BeginHorizontal();
+
+			pt.spawnCooldown = (float)EditorGUILayout.FloatField("SpawnCooldown", pt.spawnCooldown);
 
 			GUILayout.EndHorizontal();
 

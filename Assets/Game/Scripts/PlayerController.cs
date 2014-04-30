@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour {
-	public float health = 20f;
+public class PlayerController : CharacterController {
 		//A list of the mob-types that can be spawned as well as their keybindings.
 	public List<MobToSpawn> thingsThatCanBeSpawned = new List<MobToSpawn>();
 		//A reference to the object indicating the point at which to spawn a mob.
@@ -19,7 +18,8 @@ public class PlayerController : MonoBehaviour {
 			//The input to spawn from.
 		public KeyCode spawnKey;
 		public KeyCode spawnKey2;
-
+		public float spawnCooldown;
+		public float spawnTimer;
 			//Constructor for eventual things to be defined by add new spawnerthing. Called in PlayerControlEditor on when adding to list.
 		public MobToSpawn(){
 
@@ -34,26 +34,21 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-		//the function to call when ripping the player of his health..
-	public void loseHealth(GameObject attacker, float baseDamage){
-
-
-		
-		health -= baseDamage;
-	}
-
 
 	void Update(){
 		foreach(MobToSpawn thingToSpawn in thingsThatCanBeSpawned){
-			if(	Input.GetKey(thingToSpawn.spawnKey)
-			   		||
-			   	Input.GetKey(thingToSpawn.spawnKey2)
-			){
-				GameObject newMob = (GameObject) Instantiate (thingToSpawn.spawnableRef, spawner.transform.position, Quaternion.identity);
-				MobController newMobsController = newMob.transform.FindChild("MobChild").GetComponent<MobController>();
-				newMobsController.playerToAttack = playerToAttack;
-				//newMobsController.resistancesToMobs = thingToSpawn.spawnableRef.transform.FindChild("KnightChild").GetComponent<MobController>().resistancesToMobs;
-				newMob.transform.parent = GameObject.Find ("Mobmanager").transform;
+			if(thingToSpawn.spawnTimer + thingToSpawn.spawnCooldown < Time.time){
+				if(	Input.GetKey(thingToSpawn.spawnKey)
+				   		||
+				   	Input.GetKey(thingToSpawn.spawnKey2)
+				){
+					GameObject newMob = (GameObject) Instantiate (thingToSpawn.spawnableRef, spawner.transform.position, Quaternion.identity);
+					MobController newMobsController = newMob.transform.FindChild("MobChild").GetComponent<MobController>();
+					newMobsController.playerToAttack = playerToAttack;
+					//newMobsController.resistancesToMobs = thingToSpawn.spawnableRef.transform.FindChild("KnightChild").GetComponent<MobController>().resistancesToMobs;
+					newMob.transform.parent = GameObject.Find ("Mobmanager").transform;
+					thingToSpawn.spawnTimer = Time.time;
+				}
 			}
 		}
 	}
