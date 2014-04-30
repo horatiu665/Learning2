@@ -88,7 +88,9 @@ public class MobController : CharacterController {
 				if(col != null){
 					MobController asd;
 
-					if(col.transform.gameObject.name == "Cylinder"){
+					if(col.transform.gameObject.name == "Cylinder"
+					   	&&
+					   col.transform.parent.gameObject == playerToAttack){
 						canMove = false;
 					}
 					else{

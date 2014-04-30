@@ -18,11 +18,13 @@ public class PlayerController : CharacterController {
 			//The input to spawn from.
 		public KeyCode spawnKey;
 		public KeyCode spawnKey2;
+			//the cooldown variable used to decide how long to wait before a new mob can be spawned.
 		public float spawnCooldown;
+			//timer to hold the time at which the last spawn happened.
 		public float spawnTimer;
-
+			//Variable to cheat and simulate that a key was pressed. Will not be here in a real setup.
 		public bool isFalseKeyDown = false;
-		
+			//Function called to simulate a keypress.
 		public void SetKeyDown(){
 			isFalseKeyDown = true;
 		}
@@ -34,7 +36,9 @@ public class PlayerController : CharacterController {
 
 
 	void Awake(){
+			//If there is no by the inspektor defined gameobject to spawn mobs from, create your own and place it where you are (this will kill you as mobs don't discriminate player yet.).
 		if(spawner == null){
+				//
 			spawner = new GameObject();
 			spawner.transform.position = transform.position;
 		}
@@ -59,6 +63,10 @@ public class PlayerController : CharacterController {
 					thingToSpawn.isFalseKeyDown = false;
 				}
 			}
+		}
+
+		if(health <= 0){
+			Application.LoadLevel("test");
 		}
 	}
 }
